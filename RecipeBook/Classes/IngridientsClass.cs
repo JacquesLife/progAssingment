@@ -6,7 +6,17 @@ namespace RecipeBook.Classes
     {
         public void numberOfIngridients()
         {
-            
+            Console.WriteLine("How many ingridients are in your recipe?: ");
+
+            // check to see if the user input is a number
+            int numberOfIngridients;
+            while (!int.TryParse(Console.ReadLine(), out numberOfIngridients))
+            {
+                Console.WriteLine("Please enter a number: ");
+            }
+
+            // output the number of ingridients
+            Console.WriteLine("You have " + numberOfIngridients + " ingridients in your recipe.");
         }
         public void ingridients() {
 
@@ -17,13 +27,13 @@ namespace RecipeBook.Classes
         public void fullRecipe() {
 
         }
-        public void ScaleRecipe() {
+        public void scaleRecipe() {
 
         }
         public void resetRecipe() {
 
         }
-        public void ClearRecipe() {
+        public void clearRecipe() {
 
         }
 
