@@ -5,78 +5,67 @@ namespace RecipeBook.Classes
     internal class IngridientsClass
 
     {
-        public void numberOfIngridients()
+       public int GetNumberOfIngredients()
         {
-        
-            Console.WriteLine("How many ingridients are in your recipe?: ");
-
-            // check to see if the user input is a number
-            int numberOfIngridients;
-            while (!int.TryParse(Console.ReadLine(), out numberOfIngridients))
+            Console.WriteLine("How many ingredients are in your recipe?: ");
+            int numberOfIngredients;
+            while (!int.TryParse(Console.ReadLine(), out numberOfIngredients))
             {
                 Console.WriteLine("Please enter a number: ");
             }
-
-            // output the number of ingridients
-            Console.WriteLine("You have " + numberOfIngridients + " ingridients in your recipe.");
+            Console.WriteLine("You have " + numberOfIngredients + " ingredients in your recipe.");
+            return numberOfIngredients;
         }
-        
-       public void ingridients(int numberOfIngridients)
-{
-        // create arrays to store the ingredients, quantities, and units of measurement
-        string[] ingredients = new string[numberOfIngridients];
-        string[] quantities = new string[numberOfIngridients];
-        string[] units = new string[numberOfIngridients];
 
-        // ask the user for the ingredients, quantities, and units
-        for (int i = 0; i < numberOfIngridients; i++)
-    {
-        Console.WriteLine("Enter ingredient name " + (i + 1) + ": ");
-        ingredients[i] = Console.ReadLine() ?? string.Empty;
-
-        // Prompt for quantity until a valid integer is entered
-        int quantity;
-        // Check if the quantity is a number
-        bool isValidQuantity = false;
-        do
+        public string GetIngredientName(int index)
         {
-            Console.WriteLine("Enter the quantity of " + ingredients[i] + ": ");
-            string? input = Console.ReadLine();
-            // Check if the quantity is a number
-            if (!int.TryParse(input, out quantity))
+            Console.WriteLine("Enter the name of ingredient " + index + ": ");
+            string? ingredient = Console.ReadLine();
+            return ingredient ?? string.Empty;
+        }
+
+        public string GetQuantity(string ingredient)
+        {
+            while (true)
             {
-                Console.WriteLine("Error: Quantity must be a number. Please try again.");
-            }
-            else
-            {
-                isValidQuantity = true;
+                Console.WriteLine("Enter the quantity of " + ingredient + ": ");
+                string quantity = Console.ReadLine() ?? string.Empty;
+                if (double.TryParse(quantity, out double result))
+                {
+                    return quantity;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a number: ");
+                }
             }
         }
-        while (!isValidQuantity);
 
-        units[i] = Console.ReadLine() ?? string.Empty;
-        // Add a space between each ingredient
-        Console.WriteLine();
-    }
-
-        // output the ingredients with quantities and units
-        Console.WriteLine("Your ingredients are: ");
-        Console.WriteLine();
-        for (int i = 0; i < numberOfIngridients; i++)
-    {
-        Console.WriteLine(ingredients[i]);
-        Console.WriteLine(quantities[i] + units[i]);
-        Console.WriteLine();
-    }
-
-      }
+        public string GetUnit(string ingredient)
+        {
+            Console.WriteLine("Enter the unit of measurement for " + ingredient + ": ");
+            string? unit = Console.ReadLine();
+            return unit ?? string.Empty;
+        }
 
         public void numberOfSteps() {
 
         }
-        public void fullRecipe() {
-
+        public void FullRecipe(string[] ingredients, string[] quantities, string[] units)
+{
+        Console.WriteLine("Here is your recipe: ");
+        Console.WriteLine();
+        for (int i = 0; i < ingredients.Length; i++)
+        {
+        Console.WriteLine("Name: " + ingredients[i]);
+        Console.WriteLine("Ingredient: " + quantities[i]);
+        Console.WriteLine("Quantity: " + units[i]);
+        Console.WriteLine("Unit: " + units[i]);
+        Console.WriteLine(); 
         }
+
+}
+
         public void scaleRecipe() {
 
         }
