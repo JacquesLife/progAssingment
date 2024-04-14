@@ -6,19 +6,19 @@ namespace RecipeBook
     {
         static void Main(string[] args)
         {
-            // Instantiate the IngridientsClass
-            IngridientsClass ingridientsClass = new IngridientsClass();
+            // Instantiate the IngredientsClass
+            IngredientsClass ingredientsClass = new IngredientsClass();
 
             // Get the number of ingredients
-            int numberOfIngredients = ingridientsClass.NumberOfIngredients();
+            int numberOfIngredients = ingredientsClass.NumberOfIngredients();
+
+            // number of steps
+            int numberOfSteps = ingredientsClass.NumberOfSteps();
             
             // Create arrays to store the ingredients, quantities, and units
             string[] ingredients = new string[numberOfIngredients];
             string[] quantities = new string[numberOfIngredients];
             string[] units = new string[numberOfIngredients];
-
-            // Declare and initialize the variable 'ingredientsClass'
-            IngridientsClass ingredientsClass = new IngridientsClass();
 
             // Get the name, quantity, and unit of each ingredient
             for (int i = 0; i < numberOfIngredients; i++)
@@ -38,8 +38,10 @@ namespace RecipeBook
             {
                 Console.WriteLine("Here is your recipe: ");
             }
+
             // Display the full recipe
-            ingredientsClass.FullRecipe(ingredients, quantities, units);
+            ingredientsClass.FullRecipe(ingredients, quantities, units, numberOfSteps);
+
         }
     }
 }

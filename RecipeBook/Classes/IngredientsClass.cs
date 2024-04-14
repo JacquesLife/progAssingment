@@ -1,9 +1,10 @@
 using System;
 using System.Net;
+using System.IO; 
 
-namespace RecipeBook.Classes
+namespace RecipeBook.Classes 
 {
-    internal class IngridientsClass
+    internal class IngredientsClass
     {
        public int NumberOfIngredients()
         {
@@ -50,21 +51,32 @@ namespace RecipeBook.Classes
             return unit ?? string.Empty;
         }
 
-        public void NumberOfSteps() {
+        public int NumberOfSteps() 
+        {
+            // ask user how many steps are in the recipe
+            Console.WriteLine("How many steps are in your recipe?: ");
+            int numberOfSteps;
+            while (!int.TryParse(Console.ReadLine(), out numberOfSteps))
+            {
+                Console.WriteLine("Please enter a number: ");
+            }
+            return numberOfSteps;
+        }
+        public void FullRecipe(string[] ingredients, string[] quantities, string[] units, int numberOfSteps)
+        {
 
+            Console.WriteLine("Here is your recipe: ");
+            Console.WriteLine();
+
+            for (int i = 0; i < ingredients.Length; i++)
+            {
+                Console.WriteLine("Name: " + ingredients[i]);
+                Console.WriteLine("Quantity: " + quantities[i]);
+                Console.WriteLine("Unit: " + units[i]);
+                Console.WriteLine();
+            }
+            Console.WriteLine("Number of steps: " + numberOfSteps);
         }
-        public void FullRecipe(string[] ingredients, string[] quantities, string[] units)
-        {
-        Console.WriteLine("Here is your recipe: ");
-        Console.WriteLine();
-        for (int i = 0; i < ingredients.Length; i++)
-        {
-        Console.WriteLine("Name: " + ingredients[i]);
-        Console.WriteLine("Quantity: " + quantities[i]);
-        Console.WriteLine("Unit: " + units[i]);
-        Console.WriteLine(); 
-        }
-    }
 
         public bool ChooseToScaleRecipe()
         {
@@ -87,14 +99,16 @@ namespace RecipeBook.Classes
             }
             return scaleRecipe == "yes";
         }
-        public double ScaleFactor() {
+        public double ScaleFactor() 
+        {
         
         // ask user for scale factor
         Console.WriteLine("How much do you want to scale your recipe 2, 3 or 0.5: ");    
         double scaleFactor;
 
         // scale number must be 2, 3 or 0.5
-        while (!double.TryParse(Console.ReadLine(), out scaleFactor) || (scaleFactor != 2 && scaleFactor != 3 && scaleFactor != 0.5)) {
+        while (!double.TryParse(Console.ReadLine(), out scaleFactor) || (scaleFactor != 2 && scaleFactor != 3 && scaleFactor != 0.5)) 
+        {
             Console.WriteLine("Please enter 2, 3 or 0.5: ");
         }
         return scaleFactor;
@@ -116,10 +130,12 @@ namespace RecipeBook.Classes
             }
         }
                 
-        public void ResetRecipe() {
+        public void ResetRecipe()
+        {
 
         }
-        public void ClearRecipe() {
+        public void ClearRecipe() 
+        {
 
         }
         
