@@ -9,6 +9,8 @@ namespace RecipeBook
             // Instantiate the IngredientsClass
             IngredientsClass ingredientsClass = new IngredientsClass();
 
+            while (true) {
+
             // Get the number of ingredients
             int numberOfIngredients = ingredientsClass.NumberOfIngredients();
 
@@ -36,7 +38,7 @@ namespace RecipeBook
                 units[i] = ingredientsClass.Unit(ingredients[i]);
             }
 
-            // Step description
+            // Call StepDescription
             string [] stepDescription = ingredientsClass.StepDescription(numberOfSteps);
 
             // user chose to scale 
@@ -45,6 +47,9 @@ namespace RecipeBook
                 double scaleFactor = ingredientsClass.ScaleFactor();
                 ingredientsClass.AdjustQuantites(ref quantities, scaleFactor);
                 Console.WriteLine("Here is your scaled recipe: ");
+
+                // Ask user to reset the recipe to original quantities only if they scaled the recipe
+                ingredientsClass.ResetRecipe(quantities, units,ingredients);
             }
             else
             {
@@ -54,11 +59,10 @@ namespace RecipeBook
             // Remove the declaration of the variable numberOfSteps
             IngredientsClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription);
 
-            // Ask user to reset the recipe
-            ingredientsClass.ResetRecipe(quantities, units, ingredients);
+            // Ask user if they want to enter a new recipe
+            ingredientsClass.EnterNewRecipe();
 
-            // Close the program
-            Console.WriteLine("Goodbye!");
+            }
         }
     }
 }

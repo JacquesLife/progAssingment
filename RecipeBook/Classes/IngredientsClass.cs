@@ -89,7 +89,6 @@ namespace RecipeBook.Classes
 //---------------------------------------------------------------------------------------------------------------------------------
         public static void FullRecipe(string[] ingredients, string[] quantities, string[] units, int numberOfSteps, string[] stepDescription)
         {
-            Console.WriteLine("Here is your recipe: ");
             Console.WriteLine();
 
             for (int i = 0; i < ingredients.Length; i++)
@@ -210,6 +209,31 @@ namespace RecipeBook.Classes
                 {
                     ScaledRecipe(quantities, units, ingredients);
                     break;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter yes or no: ");
+                }
+            }
+        }
+//---------------------------------------------------------------------------------------------------------------------------------
+        public void EnterNewRecipe()
+        {
+            Console.WriteLine("Would you like to enter a new recipe? (yes/no): ");
+            string? newRecipe;
+
+            while (true)
+            {
+                newRecipe = Console.ReadLine();
+                if (newRecipe == "yes")
+                {
+                    Console.WriteLine();
+                    break;
+                }
+                else if (newRecipe == "no")
+                {
+                    Console.WriteLine("Goodbye!");
+                    Environment.Exit(0);
                 }
                 else
                 {
