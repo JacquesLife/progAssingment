@@ -13,7 +13,7 @@ namespace RecipeBook
             int numberOfIngredients = ingredientsClass.NumberOfIngredients();
 
             // number of steps
-            int numberOfSteps = ingredientsClass.NumberOfSteps();
+            int [] steps = ingredientsClass.NumberOfSteps(numberOfIngredients);
             
             // Create arrays to store the ingredients, quantities, and units
             string[] ingredients = new string[numberOfIngredients];
@@ -40,11 +40,13 @@ namespace RecipeBook
             }
 
             // Display the full recipe
-            ingredientsClass.FullRecipe(ingredients, quantities, units, numberOfSteps);
+            IngredientsClass.FullRecipe(ingredients, quantities, units, steps);
 
             // Ask user to reset the recipe
             ingredientsClass.ResetRecipe(quantities, units, ingredients);
 
+            // Close the program
+            Console.WriteLine("Goodbye!");
         }
     }
 }
