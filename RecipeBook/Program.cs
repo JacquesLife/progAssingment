@@ -31,7 +31,7 @@ namespace RecipeBook
             if (ingredientsClass.ChooseToScaleRecipe())
             {
                 double scaleFactor = ingredientsClass.ScaleFactor();
-                ingredientsClass.ScaleRecipe(ref quantities, scaleFactor);
+                ingredientsClass.AdjustQuantites(ref quantities, scaleFactor);
                 Console.WriteLine("Here is your scaled recipe: ");
             }
             else
@@ -41,6 +41,9 @@ namespace RecipeBook
 
             // Display the full recipe
             ingredientsClass.FullRecipe(ingredients, quantities, units, numberOfSteps);
+
+            // Ask user to reset the recipe
+            ingredientsClass.ResetRecipe(quantities, units, ingredients);
 
         }
     }
