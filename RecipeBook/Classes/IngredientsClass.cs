@@ -53,35 +53,27 @@ namespace RecipeBook.Classes
             return unit ?? string.Empty;
         }
 //---------------------------------------------------------------------------------------------------------------------------------
-        public int[] NumberOfSteps(int numberOfIngredients)
+        public int NumberOfSteps()
         {
-            int[] steps = new int[numberOfIngredients];
-
-            // ask user for the number of steps in Recipe
-            for (int i = 0; i < numberOfIngredients; i++)
+            Console.WriteLine("How many steps are in your recipe?: ");
+            int numberOfSteps;
+            while (!int.TryParse(Console.ReadLine(), out numberOfSteps) || numberOfSteps <= 0)
             {
-                Console.WriteLine("How many steps are in your Recipe ");
-                while (!int.TryParse(Console.ReadLine(), out steps[i]))
-                {
-                    Console.WriteLine("Please enter a number: ");
-                }
+                Console.WriteLine("Please enter a number greater than 0: ");
             }
-            return steps;
+            return numberOfSteps;
         }
 //---------------------------------------------------------------------------------------------------------------------------------
-        public string[][] StepDescription(int[] steps)
+        public string[] StepDescription(int numberOfSteps)
         {
-            string[][] stepDescription = new string[steps.Length][];
-            for (int i = 0; i < steps.Length; i++)
+            string[] steps = new string[numberOfSteps];
+            for (int i = 0; i < numberOfSteps; i++)
             {
-                stepDescription[i] = new string[steps[i]];
-                for (int j = 0; j < steps[i]; j++)
-                {
-                    Console.WriteLine("Enter a description for step {j + 1}; ");
-                    stepDescription[i][j] = ValidateDescription(Console.ReadLine() ?? string.Empty);
-                }
+                // ask user for step description
+                Console.WriteLine($"Enter a description for step {i + 1}: ");
+                steps[i] = Console.ReadLine() ?? string.Empty;
             }
-            return stepDescription;
+            return steps;
         }
 //---------------------------------------------------------------------------------------------------------------------------------
 
@@ -95,7 +87,7 @@ namespace RecipeBook.Classes
             return description;
         }
 //---------------------------------------------------------------------------------------------------------------------------------
-        public static void FullRecipe(string[] ingredients, string[] quantities, string[] units, int[] numberOfSteps)
+        public static void FullRecipe(string[] ingredients, string[] quantities, string[] units, int numberOfSteps, string[] stepDescription)
         {
             Console.WriteLine("Here is your recipe: ");
             Console.WriteLine();
@@ -105,10 +97,14 @@ namespace RecipeBook.Classes
                 Console.WriteLine("Name: " + ingredients[i]);
                 Console.WriteLine("Quantity: " + quantities[i]);
                 Console.WriteLine("Unit: " + units[i]);
-                Console.WriteLine("Steps: " + numberOfSteps[i]);
                 Console.WriteLine();
             }
             Console.WriteLine("Number of steps: " + numberOfSteps);
+            Console.WriteLine();
+            for (int i = 0; i < numberOfSteps; i++)
+            {
+                Console.WriteLine("Step " + (i + 1) + ": " + stepDescription[i]);
+            }
         }
 //---------------------------------------------------------------------------------------------------------------------------------
         public static void OriginalRecipe(string[] ingredients, string[] quantities, string[] units)

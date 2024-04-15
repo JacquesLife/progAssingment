@@ -13,8 +13,16 @@ namespace RecipeBook
             int numberOfIngredients = ingredientsClass.NumberOfIngredients();
 
             // number of steps
-            int [] steps = ingredientsClass.NumberOfSteps(numberOfIngredients);
-            
+            Console.WriteLine("How many steps are in your recipe?: ");
+            int numberOfSteps;
+            while (!int.TryParse(Console.ReadLine(), out numberOfSteps) || numberOfSteps <= 0)
+            {
+                Console.WriteLine("Please enter a number greater than 0: ");
+            }
+
+            // Create an array to store the steps
+            string[] steps = new string[numberOfSteps];
+
             // Create arrays to store the ingredients, quantities, and units
             string[] ingredients = new string[numberOfIngredients];
             string[] quantities = new string[numberOfIngredients];
@@ -27,6 +35,10 @@ namespace RecipeBook
                 quantities[i] = ingredientsClass.Quantity(ingredients[i]);
                 units[i] = ingredientsClass.Unit(ingredients[i]);
             }
+
+            // Step description
+            string [] stepDescription = ingredientsClass.StepDescription(numberOfSteps);
+
             // user chose to scale 
             if (ingredientsClass.ChooseToScaleRecipe())
             {
@@ -39,8 +51,8 @@ namespace RecipeBook
                 Console.WriteLine("Here is your recipe: ");
             }
 
-            // Display the full recipe
-            IngredientsClass.FullRecipe(ingredients, quantities, units, steps);
+            // Remove the declaration of the variable numberOfSteps
+            IngredientsClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription);
 
             // Ask user to reset the recipe
             ingredientsClass.ResetRecipe(quantities, units, ingredients);
