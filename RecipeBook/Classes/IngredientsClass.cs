@@ -46,12 +46,23 @@ namespace RecipeBook.Classes
             }
         }
 //---------------------------------------------------------------------------------------------------------------------------------
-        public string Unit(string ingredient)
+        public Dictionary<string, double> Units()
         {
-            Console.WriteLine("Enter the unit of measurement for " + ingredient + ": ");
-            string? unit = Console.ReadLine();
-            return unit ?? string.Empty;
+            //Dictionary to store the units
+            Dictionary<string, double> units = new()
+            {
+                {"cups", 1.0},
+                {"tbsp", 1.0 * 16},
+                {"tsp", 1.0 * 48},
+                {"oz", 1.0 * 8},
+                {"lb", 1.0 * 0.125},
+                {"g", 1.0 * 236.588},
+                {"kg", 1.0 * 0.236588}
+            };
+            return units;
         }
+
+            
 //---------------------------------------------------------------------------------------------------------------------------------
         public int NumberOfSteps()
         {
@@ -87,7 +98,7 @@ namespace RecipeBook.Classes
             return description;
         }
 //---------------------------------------------------------------------------------------------------------------------------------
-        public static void FullRecipe(string[] ingredients, string[] quantities, string[] units, int numberOfSteps, string[] stepDescription)
+        public static void FullRecipe(string[] ingredients, string[] quantities, string[] units, int numberOfSteps, string[] stepDescription, Dictionary<string, double> unitConversions)
         {
             Console.WriteLine();
 
@@ -96,6 +107,10 @@ namespace RecipeBook.Classes
                 Console.WriteLine("Name: " + ingredients[i]);
                 Console.WriteLine("Quantity: " + quantities[i]);
                 Console.WriteLine("Unit: " + units[i]);
+                foreach (var entry in unitConversions)
+            {
+                Console.WriteLine($"{entry.Key} = {entry.Value} cups");
+            }
                 Console.WriteLine();
             }
             Console.WriteLine("Number of steps: " + numberOfSteps);
@@ -106,15 +121,18 @@ namespace RecipeBook.Classes
             }
         }
 //---------------------------------------------------------------------------------------------------------------------------------
-        public static void OriginalRecipe(string[] ingredients, string[] quantities, string[] units)
+        public static void OriginalRecipe(string[] ingredients, string[] quantities, string[] units, Dictionary<string, double> unitConversions)
         {
             Console.WriteLine("Here is your original recipe: ");
             for (int i = 0; i < ingredients.Length; i++)
             {
                 Console.WriteLine("Name: " + ingredients[i]);
-                Console.WriteLine("Quantity: " + quantities[i]);
-                Console.WriteLine("Unit: " + units[i]);
-                Console.WriteLine();
+                Console.WriteLine("Quantity: " + quantities[i] + " " + units[i]);
+                Console.WriteLine("Units: ");
+            }
+            foreach (var entry in unitConversions)
+            {
+                Console.WriteLine($"{entry.Key} = {entry.Value} cups");
             }
         }
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -189,7 +207,7 @@ namespace RecipeBook.Classes
         }
 //---------------------------------------------------------------------------------------------------------------------------------
                 
-        public void ResetRecipe(string[] quantities, string[] units, string[] ingredients)
+        public void ResetRecipe(string[] quantities, string[] units, string[] ingredients, Dictionary<string, double> unitConversions)
         {
             // reset the recipe to the original quantities
             Console.WriteLine("Would you like to reset the recipe to the original quantities? (yes/no): ");
@@ -202,7 +220,7 @@ namespace RecipeBook.Classes
                 {
                     // reset the quantities to the original quantities and ensure that the original quantities are not null
                     quantities = (string[])(originalQuantities?.Clone() ?? Array.Empty<string>());
-                    OriginalRecipe(ingredients, quantities, units);
+                    OriginalRecipe(ingredients, quantities, units, unitConversions);
                     break;
                 }
                 else if (resetRecipe == "no")

@@ -35,11 +35,15 @@ namespace RecipeBook
             {
                 ingredients[i] = ingredientsClass.IngredientName(i + 1);
                 quantities[i] = ingredientsClass.Quantity(ingredients[i]);
-                units[i] = ingredientsClass.Unit(ingredients[i]);
             }
+            // Get the unit conversion for each ingredient
+            Dictionary<string, double> unitConversion = ingredientsClass.Units();
 
             // Call StepDescription
             string [] stepDescription = ingredientsClass.StepDescription(numberOfSteps);
+
+            // Display the current recipe
+            IngredientsClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription, unitConversion);
 
             // user chose to scale 
             if (ingredientsClass.ChooseToScaleRecipe())
@@ -48,16 +52,17 @@ namespace RecipeBook
                 ingredientsClass.AdjustQuantites(ref quantities, scaleFactor);
                 Console.WriteLine("Here is your scaled recipe: ");
 
+                // Display the scaled recipe
+                IngredientsClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription, unitConversion);
+
                 // Ask user to reset the recipe to original quantities only if they scaled the recipe
-                ingredientsClass.ResetRecipe(quantities, units,ingredients);
+                ingredientsClass.ResetRecipe(quantities, units, ingredients, unitConversion);
             }
             else
             {
                 Console.WriteLine("Here is your recipe: ");
             }
 
-            // Remove the declaration of the variable numberOfSteps
-            IngredientsClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription);
 
             // Ask user if they want to enter a new recipe
             ingredientsClass.EnterNewRecipe();
