@@ -1,14 +1,14 @@
 References
-/// https://www.c-sharpcorner.com/article/change-console-foreground-and-background-color-in-c-sharp/
-/// https://www.w3schools.com/cs/cs_operators_logical.php
-/// https://www.geeksforgeeks.org/ref-in-c-sharp/
-/// https://www.c-sharpcorner.com/article/how-to-copy-an-array-in-c-sharp/
-/// https://www.c-sharpcorner.com/UploadFile/c713c3/how-to-exit-in-C-Sharp/#
-/// https://www.c-sharpcorner.com/article/change-console-foreground-and-background-color-in-c-sharp/
-/// https://www.w3schools.com/cs/cs_operators_logical.php
-/// https://www.geeksforgeeks.org/ref-in-c-sharp/
-/// https://www.c-sharpcorner.com/article/how-to-copy-an-array-in-c-sharp/
-/// https://www.c-sharpcorner.com/UploadFile/c713c3/how-to-exit-in-C-Sharp/#
+https://www.c-sharpcorner.com/article/change-console-foreground-and-background-color-in-c-sharp/
+https://www.w3schools.com/cs/cs_operators_logical.php
+https://www.geeksforgeeks.org/ref-in-c-sharp/
+https://www.c-sharpcorner.com/article/how-to-copy-an-array-in-c-sharp/
+https://www.c-sharpcorner.com/UploadFile/c713c3/how-to-exit-in-C-Sharp/#
+https://www.c-sharpcorner.com/article/change-console-foreground-and-background-color-in-c-sharp/
+https://www.w3schools.com/cs/cs_operators_logical.php
+https://www.geeksforgeeks.org/ref-in-c-sharp/
+https://www.c-sharpcorner.com/article/how-to-copy-an-array-in-c-sharp/
+https://www.c-sharpcorner.com/UploadFile/c713c3/how-to-exit-in-C-Sharp/#
 
 Step 1 
 Download Visual Studios here https://visualstudio.microsoft.com/downloads/ select community edition
