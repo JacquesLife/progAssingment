@@ -1,13 +1,43 @@
-﻿using RecipeBook.Classes;
+﻿/// <summary>
+/// Name: Jacques du Plessis
+/// Student: ST10329686
+/// Module: PROG6221
+/// </summary>
+/// This program is a recipe book that allows the user to enter a recipe with ingredients, quantities, and units. 
+/// The user can then scale the recipe and reset it to the original quantities.
+/// References All
+/// https://www.c-sharpcorner.com/article/change-console-foreground-and-background-color-in-c-sharp/
+/// https://www.w3schools.com/cs/cs_operators_logical.php
+/// https://www.geeksforgeeks.org/ref-in-c-sharp/
+/// https://www.c-sharpcorner.com/article/how-to-copy-an-array-in-c-sharp/
+/// https://www.c-sharpcorner.com/UploadFile/c713c3/how-to-exit-in-C-Sharp/#
+/// https://www.c-sharpcorner.com/article/change-console-foreground-and-background-color-in-c-sharp/
+/// https://www.w3schools.com/cs/cs_operators_logical.php
+/// https://www.geeksforgeeks.org/ref-in-c-sharp/
+/// https://www.c-sharpcorner.com/article/how-to-copy-an-array-in-c-sharp/
+/// https://www.c-sharpcorner.com/UploadFile/c713c3/how-to-exit-in-C-Sharp/#
+
+using RecipeBook.Classes;
 
 namespace RecipeBook
 {
     class Program
     {
+        /// <summary>
+	   /// This is the main method that runs the program it it utlisies the IngredientsClass and RecipeClass to get the recipe from the user and display it
+       /// It is responsible for ordering the methods in the correct order and calling the correct methods
+       /// It is the structure of the program
+	   /// </summary>
+
+// --------------------------------------------------------------------------------------------------------------------------------
         static void Main(string[] args)
         {
+            
             // Instantiate the IngredientsClass
             IngredientsClass ingredientsClass = new IngredientsClass();
+
+            // Instantiate the RecipeClass
+            RecipeClass recipeClass = new RecipeClass();
 
             while (true) {
 
@@ -43,32 +73,34 @@ namespace RecipeBook
             string [] stepDescription = ingredientsClass.StepDescription(numberOfSteps);
 
             // Display the current recipe
-            IngredientsClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription, unitConversion);
+            RecipeClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription, unitConversion);
 
             // user chose to scale 
-            if (ingredientsClass.ChooseToScaleRecipe())
+            if (recipeClass.ChooseToScaleRecipe())
             {
-                double scaleFactor = ingredientsClass.ScaleFactor();
-                ingredientsClass.AdjustQuantites(ref quantities, scaleFactor);
+                double scaleFactor = recipeClass.ScaleFactor();
+                recipeClass.AdjustQuantites(ref quantities, scaleFactor);
                 Console.WriteLine("Here is your scaled recipe: ");
 
                 // Display the scaled recipe
-                IngredientsClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription, unitConversion);
+                RecipeClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription, unitConversion);
 
                 // Ask user to reset the recipe to original quantities only if they scaled the recipe
-                ingredientsClass.ResetRecipe(quantities, units, ingredients, unitConversion);
+                recipeClass.ResetRecipe(ref quantities, units, ingredients, unitConversion, ref stepDescription);
             }
             else
             {
                 Console.WriteLine("Here is your recipe: ");
+                // Display the current recipe
+                RecipeClass.FullRecipe(ingredients, quantities, units, steps.Length, stepDescription, unitConversion);
             }
 
-
             // Ask user if they want to enter a new recipe
-            ingredientsClass.EnterNewRecipe();
+            recipeClass.EnterNewRecipe();
 
             }
         }
     }
 }
             
+//-------------------------------------------------end of file --------------------------------------------------------------

@@ -1,3 +1,21 @@
+/// <summary>
+/// Name: Jacques du Plessis
+/// Student: ST10329686
+/// Module: PROG6221
+/// </summary>
+/// This class is responsible for getting the number of ingredients, 
+/// the name of each ingredient, the quantity of each ingredient, the unit of each ingredient, 
+/// the number of steps, and the description of each step from the user.
+/// References:
+/// https://learn.microsoft.com/en-us/dotnet/api/system.int32.tryparse?view=net-8.0
+/// https://www.tutorialsteacher.com/csharp/csharp-ternary-operator
+/// https://www.youtube.com/watch?v=5VvAcoBJGJs
+/// https://www.geeksforgeeks.org/c-sharp-arrays/
+/// https://stackoverflow.com/questions/169217/c-sharp-equivalent-of-the-isnull-function-in-sql-server
+/// 
+
+
+
 using System;
 using System.Net;
 using System.IO; 
@@ -6,12 +24,20 @@ namespace RecipeBook.Classes
 {
     internal class IngredientsClass
     {
-        private string[]? originalQuantities;
 //---------------------------------------------------------------------------------------------------------------------------------
        public int NumberOfIngredients()
-        {
+        /// <summary>
+        ///https://learn.microsoft.com/en-us/dotnet/api/system.int32.tryparse?view=net-8.0
+        /// This method asks the user for the number of ingredients in the recipe.
+        /// It checks if the input is a number.
+        /// </summary>
+        {   
+            // ask user for number of ingredients
             Console.WriteLine("How many ingredients are in your recipe?: ");
+
             int numberOfIngredients;
+
+            // check if input is a number
             while (!int.TryParse(Console.ReadLine(), out numberOfIngredients))
             {
                 Console.WriteLine("Please enter a number: ");
@@ -23,18 +49,29 @@ namespace RecipeBook.Classes
         }
 //---------------------------------------------------------------------------------------------------------------------------------
         public string IngredientName(int index)
+        /// <summary>
+        /// https://www.tutorialsteacher.com/csharp/csharp-ternary-operator
+        /// This method asks the user for the name of each ingredient in the recipe.
+        /// </summary>
         {
+            // ask user for ingredient name
             Console.WriteLine("Enter the name of ingredient " + index + ": ");
+
+            // check if input is null
             string? ingredient = Console.ReadLine();
             return ingredient ?? string.Empty;
         }
 //---------------------------------------------------------------------------------------------------------------------------------
         public string Quantity(string ingredient)
-        {
+        {   
+
             while (true)
             {
+                // ask user for quantity of ingredient
                 Console.WriteLine("Enter the quantity of " + ingredient + ": ");
                 string quantity = Console.ReadLine() ?? string.Empty;
+
+                // check if input is a number
                 if (double.TryParse(quantity, out double result))
                 {
                     return quantity;
@@ -47,27 +84,30 @@ namespace RecipeBook.Classes
         }
 //---------------------------------------------------------------------------------------------------------------------------------
         public Dictionary<string, double> Units()
+        /// <summary>
+        /// https://www.youtube.com/watch?v=5VvAcoBJGJs
+        /// This method creates a dictionary to store the units of measurement for the ingredients.
+        /// </summary>
         {
-            //Dictionary to store the units
+            // Dictionary to store the units
             Dictionary<string, double> units = new()
             {
                 {"cups", 1.0},
-                {"tbsp", 1.0 * 16},
-                {"tsp", 1.0 * 48},
-                {"oz", 1.0 * 8},
-                {"lb", 1.0 * 0.125},
-                {"g", 1.0 * 236.588},
-                {"kg", 1.0 * 0.236588}
+                {"tablespoons", 1.0 * 16},
+                {"teaspoons", 1.0 * 48},
             };
-            return units;
+                return units;
         }
 
             
 //---------------------------------------------------------------------------------------------------------------------------------
         public int NumberOfSteps()
         {
+            // ask user for number of steps
             Console.WriteLine("How many steps are in your recipe?: ");
             int numberOfSteps;
+
+            // check if input is a number greater than 0
             while (!int.TryParse(Console.ReadLine(), out numberOfSteps) || numberOfSteps <= 0)
             {
                 Console.WriteLine("Please enter a number greater than 0: ");
@@ -76,7 +116,13 @@ namespace RecipeBook.Classes
         }
 //---------------------------------------------------------------------------------------------------------------------------------
         public string[] StepDescription(int numberOfSteps)
+        /// <summary>
+        /// https://www.geeksforgeeks.org/c-sharp-arrays/
+        /// This method asks the user for the description of each step in the recipe.
+        /// It stores the steps in an array.
+        /// </summary>
         {
+            // Create an array to store the steps
             string[] steps = new string[numberOfSteps];
             for (int i = 0; i < numberOfSteps; i++)
             {
@@ -89,7 +135,12 @@ namespace RecipeBook.Classes
 //---------------------------------------------------------------------------------------------------------------------------------
 
         public string ValidateDescription(string description)
+        /// <summary>
+        /// https://stackoverflow.com/questions/169217/c-sharp-equivalent-of-the-isnull-function-in-sql-server
+        /// This method checks if the description is empty and asks the user to enter a description if it is empty.
+        /// </summary>
         {
+            // check if description is empty
             while (string.IsNullOrEmpty(description))
             {
                 Console.WriteLine("Description cannot be empty. Please enter a description: ");
@@ -97,168 +148,6 @@ namespace RecipeBook.Classes
             }
             return description;
         }
-//---------------------------------------------------------------------------------------------------------------------------------
-        public static void FullRecipe(string[] ingredients, string[] quantities, string[] units, int numberOfSteps, string[] stepDescription, Dictionary<string, double> unitConversions)
-        {
-            Console.WriteLine();
-
-            for (int i = 0; i < ingredients.Length; i++)
-            {
-                Console.WriteLine("Name: " + ingredients[i]);
-                Console.WriteLine("Quantity: " + quantities[i]);
-                Console.WriteLine("Unit: " + units[i]);
-                foreach (var entry in unitConversions)
-            {
-                Console.WriteLine($"{entry.Key} = {entry.Value} cups");
-            }
-                Console.WriteLine();
-            }
-            Console.WriteLine("Number of steps: " + numberOfSteps);
-            Console.WriteLine();
-            for (int i = 0; i < numberOfSteps; i++)
-            {
-                Console.WriteLine("Step " + (i + 1) + ": " + stepDescription[i]);
-            }
-        }
-//---------------------------------------------------------------------------------------------------------------------------------
-        public static void OriginalRecipe(string[] ingredients, string[] quantities, string[] units, Dictionary<string, double> unitConversions)
-        {
-            Console.WriteLine("Here is your original recipe: ");
-            for (int i = 0; i < ingredients.Length; i++)
-            {
-                Console.WriteLine("Name: " + ingredients[i]);
-                Console.WriteLine("Quantity: " + quantities[i] + " " + units[i]);
-                Console.WriteLine("Units: ");
-            }
-            foreach (var entry in unitConversions)
-            {
-                Console.WriteLine($"{entry.Key} = {entry.Value} cups");
-            }
-        }
-//---------------------------------------------------------------------------------------------------------------------------------
-        public bool ChooseToScaleRecipe()
-        {
-            // ask user if they want to scale the recipe
-            Console.WriteLine("Would you like to scale the recipe? (yes/no): ");
-            
-            // input must be yes or no
-            string? scaleRecipe;
-            while (true)
-            {
-                scaleRecipe = Console.ReadLine();
-                if (scaleRecipe == "yes" || scaleRecipe == "no")
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Please enter yes or no: ");
-                }
-            }
-            return scaleRecipe == "yes";
-        }
-//---------------------------------------------------------------------------------------------------------------------------------
-        public double ScaleFactor() 
-        {
-        // ask user for scale factor
-        Console.WriteLine("How much do you want to scale your recipe 2, 3 or 0.5: ");    
-        double scaleFactor;
-
-        // scale number must be 2, 3 or 0.5
-        while (!double.TryParse(Console.ReadLine(), out scaleFactor) || (scaleFactor != 2 && scaleFactor != 3 && scaleFactor != 0.5)) 
-        {
-            Console.WriteLine("Please enter 2, 3 or 0.5: ");
-        }
-        return scaleFactor;
-        }
-//---------------------------------------------------------------------------------------------------------------------------------
-
-        public void AdjustQuantites(ref string[] quantities, double scaleFactor)
-        {
-            //store quantities before scaling
-            originalQuantities = (string[])quantities.Clone();
-
-            for (int i = 0; i < quantities.Length; i++)
-            {
-                if (double.TryParse(quantities[i], out double result))
-                {
-                    // scale the quantity by the scale factor 2, 3 or 0.5
-                    quantities[i] = (result * scaleFactor).ToString();
-                }
-                else
-                {
-                    Console.WriteLine("Error: Quantity must be a number!");
-                }
-            }
-        }
-//---------------------------------------------------------------------------------------------------------------------------------
-
-        public void ScaledRecipe(string[] quantities, string[] units, string[] ingredients)
-        {
-            //scaled Recipe 
-            Console.WriteLine("Here is your scaled recipe: ");
-            for (int i = 0; i < ingredients.Length; i++)
-            {
-                Console.WriteLine("Name: " + ingredients[i]);
-                Console.WriteLine("Quantity: " + quantities[i]);
-                Console.WriteLine("Unit: " + units[i]);
-                Console.WriteLine();
-            }
-        }
-//---------------------------------------------------------------------------------------------------------------------------------
-                
-        public void ResetRecipe(string[] quantities, string[] units, string[] ingredients, Dictionary<string, double> unitConversions)
-        {
-            // reset the recipe to the original quantities
-            Console.WriteLine("Would you like to reset the recipe to the original quantities? (yes/no): ");
-            string? resetRecipe;
-
-            while (true)
-            {
-                resetRecipe = Console.ReadLine();
-                if (resetRecipe == "yes")
-                {
-                    // reset the quantities to the original quantities and ensure that the original quantities are not null
-                    quantities = (string[])(originalQuantities?.Clone() ?? Array.Empty<string>());
-                    OriginalRecipe(ingredients, quantities, units, unitConversions);
-                    break;
-                }
-                else if (resetRecipe == "no")
-                {
-                    ScaledRecipe(quantities, units, ingredients);
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Please enter yes or no: ");
-                }
-            }
-        }
-//---------------------------------------------------------------------------------------------------------------------------------
-        public void EnterNewRecipe()
-        {
-            Console.WriteLine("Would you like to enter a new recipe? (yes/no): ");
-            string? newRecipe;
-
-            while (true)
-            {
-                newRecipe = Console.ReadLine();
-                if (newRecipe == "yes")
-                {
-                    Console.WriteLine();
-                    break;
-                }
-                else if (newRecipe == "no")
-                {
-                    Console.WriteLine("Goodbye!");
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    Console.WriteLine("Please enter yes or no: ");
-                }
-            }
-        }
-//---------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------end of file------------------------------------------------------------------
     }
 }
