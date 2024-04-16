@@ -36,5 +36,5 @@ My referencing for completing this aplication
 - [Change Console Foreground and Background Color in C#](https://www.c-sharpcorner.com/article/change-console-foreground-and-background-color-in-c-sharp/)
 - [Logical Operators in C#](https://www.w3schools.com/cs/cs_operators_logical.php)
 - [Ref Keyword in C#](https://www.geeksforgeeks.org/ref-in-c-sharp/)
-- [How to Copy an Array in C#](https://www.c-sharpcorner.com/UploadFile/c713c3/how-to-copy-an-array-in-c-sharp/)
+- [How to Copy an Array in C#](https://www.c-sharpcorner.com/article/how-to-copy-an-array-in-c-sharp/)
 - [Exiting an Application in C#](https://www.c-sharpcorner.com/UploadFile/c713c3/how-to-exit-in-C-Sharp/)
